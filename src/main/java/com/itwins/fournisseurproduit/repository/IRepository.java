@@ -22,6 +22,8 @@ public interface IRepository {
     public List<Produit> findAllProduit();
     public boolean addProduit(String description,int prix, int id_fourn);
     public boolean addFournisseur(String nom, String ville);
+    public boolean deleteProduit(int id);
+    public boolean deleteFournisseur(int id);
         
 
     

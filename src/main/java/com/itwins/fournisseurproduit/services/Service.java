@@ -43,13 +43,20 @@ public class Service {
     }
 
     public boolean addProduit(String description, int prix, int idFourn){
-
         return repository.addProduit(description, prix, idFourn);
         
     }
     
     public boolean addFournisseur(String nom, String ville){
         return repository.addFournisseur(nom, ville);
+    }
+    
+    public boolean deleteProduit(int id){
+        return repository.deleteProduit(id);
+    }
+    
+    public boolean deleteFournisseur(int id){
+        return repository.deleteFournisseur(id);
     }
     
     

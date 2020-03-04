@@ -177,6 +177,40 @@ public class Repository implements IRepository {
         return false;
     }
 
+    @Override
+    public boolean deleteProduit(int id) {
+        try {
+            String query = "DELETE  FROM produits WHERE id="+id
+                    ;
+            Statement st = connection.createStatement();
+            st.execute(query);
+
+            
+            return true;
+
+        } catch (SQLException e) {
+            
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteFournisseur(int id) {
+        try {
+                String query = "DELETE  FROM fournisseur WHERE id="+id
+                        ;
+                Statement st = connection.createStatement();
+                st.execute(query);
+
+
+                return true;
+
+            } catch (SQLException e) {
+
+            }
+            return false;
+        }
+
 
 
 }

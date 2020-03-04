@@ -21,18 +21,25 @@ public class Controller {
         service = new Service();
     }
     
-    public List processRequest(int numeroRequest, int idFournisseur){
+    public List processRequest(int numeroRequest, int id){
         List list = null;
         switch(numeroRequest){
             case 1:
                 list = service.findAllProduit();
                 break;
             case 2:
-                list = service.findAllProduitByIdFournisseur(idFournisseur);
+                list = service.findAllProduitByIdFournisseur(id);
                 break;
             case 3:
                 list = service.findAllFournisseur();
                 System.out.println(list);
+                break;
+            case 6:
+                service.deleteFournisseur(id);
+                break;
+               
+            case 7:
+                service.deleteProduit(id);
                 break;
                 
             }
@@ -57,5 +64,7 @@ public class Controller {
             }
         return null;
     }
+    
+
     
 }

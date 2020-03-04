@@ -26,6 +26,7 @@ public class MainView extends javax.swing.JFrame {
 
     Controller controller;
     Service service;
+    int mode = 0;
 
     /**
      * Creates new form view
@@ -40,6 +41,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     public void updateTableProduit(int processRequest, int idFourn) {
+        mode = 0;
         List<Produit> produits = controller.processRequest(processRequest, idFourn);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         String header[] = {"id", "label", "prix", "id_fourn"};
@@ -60,6 +62,7 @@ public class MainView extends javax.swing.JFrame {
     }
     
   public void updateTableFournisseur(int processRequest) {
+        mode = 1;
         List<Fournisseur> fournisseurs = controller.processRequest(processRequest, -1);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         String header[] = {"id", "nom", "ville"};
@@ -128,6 +131,7 @@ public class MainView extends javax.swing.JFrame {
         villeFournisseurTextField = new javax.swing.JTextField();
         ajouterFournisseurBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        supprimerBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -225,6 +229,13 @@ public class MainView extends javax.swing.JFrame {
         jLabel6.setText("Gestion de produits");
         jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        supprimerBtn.setText("Supprimer");
+        supprimerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supprimerBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -276,6 +287,10 @@ public class MainView extends javax.swing.JFrame {
                         .addGap(271, 271, 271)
                         .addComponent(jLabel6)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addComponent(supprimerBtn)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,9 +314,8 @@ public class MainView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(produitBtn)
                         .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel8))
@@ -326,8 +340,11 @@ public class MainView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(ajouterProduit)
-                                    .addComponent(ajouterFournisseurBtn))
-                                .addGap(78, 78, 78))))))
+                                    .addComponent(ajouterFournisseurBtn)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(supprimerBtn)
+                        .addGap(10, 10, 10))))
         );
 
         pack();
@@ -390,6 +407,21 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idFournisseurTextFieldActionPerformed
 
+    private void supprimerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerBtnActionPerformed
+       int row = table.getSelectedRow();
+       int value = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+       if (mode == 0){
+           controller.processRequest(7, value);
+            updateTableProduit(1, -1);
+       } else {
+           controller.processRequest(6,value);
+                      updateTableFournisseur(3);
+
+          
+       }
+       
+    }//GEN-LAST:event_supprimerBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -448,6 +480,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField nomFournisseurTextField;
     private javax.swing.JTextField prixTextField;
     private javax.swing.JButton produitBtn;
+    private javax.swing.JButton supprimerBtn;
     private javax.swing.JTable table;
     private javax.swing.JButton toutLesFournisseurs;
     private javax.swing.JTextField villeFournisseurTextField;
