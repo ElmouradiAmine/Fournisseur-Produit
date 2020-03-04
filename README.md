@@ -14,4 +14,6 @@ Voici un screen shot de l'application :
   <li>Filtrer la liste des produits selon les fournisseurs.</li>
   <li>Ajouter un produit.</li>
   <li>Ajouter un fournisseur.</li>
+  <li>Supprimer un fournisseur.</li>
+  <li>Supprimer un produit.</li>
 </ul>
